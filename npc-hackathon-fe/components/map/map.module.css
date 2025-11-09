@@ -1,0 +1,156 @@
+:root{
+  --panel-width: 360px;
+  --accent: #007aff;
+  --accent-2: #00c6ff;
+  --bg: #ffffff;
+  --muted: #6b7280;
+}
+
+.container{
+  display: flex;
+  width: 100%;
+  height: 420px;
+  background: #f8fafc;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e6edf3;
+}
+
+.map{
+  flex: 1;
+  position: relative;
+  min-height: 420px;
+}
+
+.routePanel{
+  width: var(--panel-width);
+  background: var(--bg);
+  border-left: 1px solid #e6edf3;
+  padding: 12px 14px;
+  overflow-y: auto;
+}
+
+.panelTitle{
+  text-align: center;
+  color: var(--accent);
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.steps{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.step{
+  background: #f5f8ff;
+  border-radius: 10px;
+  padding: 10px;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(16,24,40,0.03);
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.stepActive{
+  background: var(--accent);
+  color: white;
+  font-weight: 600;
+}
+
+.distanceLabel{
+  background: white;
+  border-radius: 8px;
+  padding: 6px 8px;
+  box-shadow: 0 2px 6px rgba(2,6,23,0.06);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.truckImg{
+  width: 36px;
+  height: 36px;
+}
+
+/* marker styling for popup content (if using DOM markers) */
+.markerDom{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #007aff, #00c6ff);
+  color: white;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.12);
+}
+
+.markerWrapper{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  /* Allow the map library to position this element. Do not force absolute positioning here —
+     letting the map control transforms keeps the label anchored correctly during scroll/pan. */
+}
+
+.placeLabel{
+  background: rgba(255,255,255,0.95);
+  padding: 6px 8px;
+  border-radius: 8px;
+  color: #0f172a;
+  font-weight: 600;
+  font-size: 13px;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+  max-width: 220px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* keep place label visually offset so it doesn't overlap marker when map moves */
+.markerWrapper .placeLabel{
+  margin-left: 8px;
+  transform: translateY(-6px);
+}
+
+.marker{
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.12);
+}
+.markerStart{ background: linear-gradient(135deg, #059669, #10b981); }
+.markerMid{ background: linear-gradient(135deg, #007aff, #2563eb); }
+.markerEnd{ background: linear-gradient(135deg, #ef4444, #dc2626); }
+.label{
+  pointer-events: none;
+  user-select: none;
+}
+.pulse{ position: relative; }
+.pulse::after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(37, 99, 235, 0.18);
+  animation: pulse 1.6s infinite ease-out;
+}
+@keyframes pulse { 0% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; } 70% { transform: translate(-50%, -50%) scale(1.9); opacity: 0; } 100% { transform: translate(-50%, -50%) scale(2); opacity: 0; } }
+
+@media (max-width: 768px){
+  .container{ flex-direction: column; height: 520px; }
+  .routePanel{ width: 100%; border-left: none; border-top: 1px solid #e6edf3; }
+}
